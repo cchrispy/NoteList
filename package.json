@@ -1,0 +1,25 @@
+{
+  "name": "notelist2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon public/server/server.js",
+    "compile": "babel src -w --out-dir public --presets=es2015,react --source-maps inline"
+  },
+  "author": "chris",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-es2015": "^1.2.0",
+    "bluebird": "^3.4.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.10",
+    "path": "^0.12.7",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "underscore": "^1.8.3"
+  }
+}
