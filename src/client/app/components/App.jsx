@@ -7,7 +7,6 @@ class App extends React.Component {
     };
   }
   setTitleState(val) {
-    console.log(val);
     this.setState({title: val});
   }
   // removeItem(title) {
@@ -16,6 +15,7 @@ class App extends React.Component {
   //   this.setState({titles: newTitles})
   // }
   addTitle() {
+    this.queryMovie(this.state.title);
     var newTitles = this.state.titles;
     newTitles.push(this.state.title);
     this.setState({
@@ -23,12 +23,30 @@ class App extends React.Component {
       title: ''
     })
   }
+  queryMovie(movieTitle) {
+    // add movie to database
+    $.ajax({
+      url: '/movies/search',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        movie: movieTitle
+      }
+    })
+  }
   render() {
     return (
       <div>
-        <h4>Enter a movie title:</h4>
-        <Input text={this.state.title} titleChange={this.setTitleState.bind(this)} addToTitles={this.addTitle.bind(this)}/>
-        <Table titles={this.state.titles} deleteElementFromTable={this.removeItem.bind(this)}/>
+
+        <div id='movieList'>
+          <h4>Enter a movie title:</h4>
+          <Input text={this.state.title} titleChange={this.setTitleState.bind(this)} addToTitles={this.addTitle.bind(this)}/>
+          <Table titles={this.state.titles}/>
+        </div>
+
+        <div id='movieInfo'>
+          <Display />
+        </div>
       </div>
     )
   }

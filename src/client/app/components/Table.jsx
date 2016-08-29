@@ -5,7 +5,7 @@ var Table = (props) => (
         <th className='tableHeader'>Movies</th>
       </tr>
       {props.titles.map((title, i) => (
-        <Title title={title} key={i} deleteTableData={props.deleteElementFromTable}/>
+        <Title title={title} key={i}/>
       ))}
       </tbody>
   </table>
