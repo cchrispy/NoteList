@@ -8,6 +8,11 @@ class App extends React.Component {
       profile: 'https://s-media-cache-ak0.pinimg.com/564x/9a/26/84/9a2684c4213171476e13732af3b26537.jpg',
       display: {
         img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg',
+      },
+      userMatch: {
+        show: false,
+        name: '',
+        image: ''
       }
     };
   }
@@ -17,7 +22,7 @@ class App extends React.Component {
       url: '/movies/search',
       method: 'GET',
       success: (data) => {
-        console.log('Fetching movies: ', data);
+        console.log('Fetching movies: ', data.movies);
         this.setState({
           titles: data.movies.map(movie => {
             return movie.title;
@@ -44,7 +49,13 @@ class App extends React.Component {
         },
         success: (data) => {
           console.log('Match data: ', data);
-
+          this.setState({
+            userMatch: {
+              show: true,
+              name: data.username,
+              image: data.picture
+            }
+          })
         },
         error: (err) => {
           console.log('Error searching for match: ', err);
@@ -89,6 +100,13 @@ class App extends React.Component {
       }
     })
   }
+  toggleMatch() {
+    this.setState({
+      userMatch: {
+        show: false
+      }
+    })
+  }
   render() {
     return (
       <div>
@@ -102,6 +120,10 @@ class App extends React.Component {
 
         <div id='movieInfo'>
           <Display info={this.state.display}/>
+        </div>
+
+        <div>
+          {this.state.userMatch.show ? <Match details={this.state.userMatch} toggle={this.toggleMatch.bind(this)}/> : null}
         </div>
       </div>
     )

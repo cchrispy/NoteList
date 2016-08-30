@@ -48,3 +48,24 @@ input {
   max-width: 50px;
   float: right;
 }
+
+.match {
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: #f09951;
+}
+
+.match h4 {
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  font-size: 6em;
+  margin: 4px;
+  border-bottom: 1px solid black;
+}
+
+.match img {
+  max-height: 400px;
+  max-width: 400px;
+}
