@@ -41,6 +41,7 @@ class App extends React.Component {
         titles: newTitles,
         title: ''
       })
+      this.checkMatches(movieTitle);
     }
   }
   queryMovie(movieTitle) {
@@ -53,13 +54,31 @@ class App extends React.Component {
         movie: movieTitle
       },
       success: (data) => {
-        console.log(data);
+        console.log('Movie: ', data);
         this.setState({
           display: data
         });
       },
       error: (err) => {
         console.log('Error querying for movie: ', err);
+      }
+    })
+  }
+  checkMatches(movieTitle) {
+    // checks if movie is in other users' movieLists
+    $.ajax({
+      url: '/movies/users',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        movie: movieTitle
+      },
+      success: (data) => {
+        console.log('Matched User: ', data);
+        
+      },
+      error: (err) => {
+        console.log('Error checking for matches: ', err);
       }
     })
   }

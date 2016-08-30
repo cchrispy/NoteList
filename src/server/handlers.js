@@ -1,4 +1,5 @@
 // handles requests to every route
+// interacts with the database
 
 var db = require('../db/config.js');
 var request = require('request');
@@ -79,12 +80,13 @@ module.exports = {
   },
 
   addMovie: (req, res, next) => {
+    // sends movie info
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
     var username = req.session.username;
     Movie.find({title: req.body.movie}).then((movies) => {
-      // add movie to db if the query returned empty
       if (!movies.length) {
+        // add movie to db if the query returned empty
         request(url, function(err, response, body) {
           if (err) {
             console.log('error from omdb request: ', err);
@@ -128,6 +130,14 @@ module.exports = {
       }
     }).catch((err) => {
       console.log('error in finding movies: ', err);
+    })
+  },
+
+  checkUsers: (req, res, next) => {
+    // finds users with matching movies
+    var movie = req.body.movie;
+    User.findOne({username: req.session.username}).then(user => {
+      console.log('users movieList: ', user.movieList);
     })
   }
 }
