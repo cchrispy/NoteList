@@ -42,3 +42,9 @@ input {
   top: 10px;
   float: right;
 }
+
+#profile {
+  max-height: 50px;
+  max-width: 50px;
+  float: right;
+}

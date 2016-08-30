@@ -5,6 +5,7 @@ class App extends React.Component {
       titles: [],
       title: '',
       match: '',
+      profile: 'https://s-media-cache-ak0.pinimg.com/564x/9a/26/84/9a2684c4213171476e13732af3b26537.jpg',
       display: {
         img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg',
       }
@@ -42,7 +43,7 @@ class App extends React.Component {
         },
         success: (data) => {
           console.log('Match data: ', data);
-          
+
         },
         error: (err) => {
           console.log('Error searching for match: ', err);
@@ -91,6 +92,7 @@ class App extends React.Component {
     return (
       <div>
         <a id='logout' href='/logout'>Logout</a>
+        <img id='profile' src={this.state.profile} />
         <div id='movieList'>
           <h4>Enter a movie title:</h4>
           <Input text={this.state.title} titleChange={this.setTitleState.bind(this)} addToTitles={this.addTitle.bind(this)}/>
