@@ -26,7 +26,20 @@ module.exports = {
     console.log('signing up');
     console.log('username: ', req.body.username);
     console.log('password: ', req.body.password);
-    res.redirect('/');
+    var username = req.body.username;
+    var password = req.body.password;
+    User.find({username: username}).then(users => {
+      if (!users.length) {
+        new User({username: username, password: password}).save()
+        .then(user => {
+          console.log('new user: ', user);
+          res.redirect('/');
+        })
+      } else {
+        console.log('that user already exists');
+        res.redirect('/login');
+      }
+    })
   },
   checkSession: (req, res, next) => {
     console.log(req.session);

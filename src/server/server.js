@@ -18,14 +18,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', handlers.checkSession, express.static(path.join(__dirname, '../client')));
 app.use('/lib', express.static(path.join(__dirname, '../../node_modules')));
 app.use('/login', express.static(path.join(__dirname, '../client/pages/login.html')))
+app.use('/logout', handlers.logout);
 app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.html')))
 
-// app.use('/signupdood', (req, res, next) => {
-//   console.log('SIGNUPDOOD');
-//   res.end();
-// })
+
 app.post('/signup', handlers.signup);
-app.use('/logout', handlers.logout);
 app.post('/login', handlers.login);
 app.post('/movies/search', handlers.addMovie);
 
