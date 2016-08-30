@@ -10,22 +10,27 @@ var omdb = 'http://www.omdbapi.com/?'
 
 module.exports = {
   login: (req, res, next) => {
-    req.session.username = req.body.username;
-    req.session.password = req.body.password;
-    console.log('LOGIN SESSION: ', req.session);
-    res.redirect('/');
+    var username = req.body.username;
+    var password = req.body.password;
+    User.findOne({username: username, password: password}).then(user => {
+      console.log(user);
+      if (user) {
+        req.session.username = req.body.username;
+        req.session.password = req.body.password;
+        res.redirect('/');
+      } else {
+        res.send('Invalid username/password. Please refresh');
+      }
+    })
   },
   logout: (req, res, next) => {
-    console.log('uhhhh');
     req.session.username = null;
     req.session.password = null;
     console.log('LOGOUT SESSION: ', req.session);
     res.redirect('/login');
   },
   signup: (req, res, next) => {
-    console.log('signing up');
-    console.log('username: ', req.body.username);
-    console.log('password: ', req.body.password);
+    console.log('signing up..');
     var username = req.body.username;
     var password = req.body.password;
     User.find({username: username}).then(users => {
@@ -33,6 +38,8 @@ module.exports = {
         new User({username: username, password: password}).save()
         .then(user => {
           console.log('new user: ', user);
+          req.session.username = req.body.username;
+          req.session.password = req.body.password;
           res.redirect('/');
         })
       } else {
@@ -42,14 +49,16 @@ module.exports = {
     })
   },
   checkSession: (req, res, next) => {
-    console.log(req.session);
-    // console.log(req.session);
-    // if (req.session.username !== '') {
-    //   next();
-    // } else {
-    //   res.redirect('/login');
-    // }
-    next();
+    var path = req.path;
+    if (path === '/' && path !== '/login' && path !== '/signup') {
+      if (!req.session.username || req.session.username === null) {
+        res.redirect('/login');
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
   },
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');

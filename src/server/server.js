@@ -14,13 +14,11 @@ app.use(session({secret: 'secret', username: null, password: null, resave: true,
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// app.use('/', express.static(path.join(__dirname, '../client')));
-app.use('/', handlers.checkSession, express.static(path.join(__dirname, '../client')));
-app.use('/lib', express.static(path.join(__dirname, '../../node_modules')));
-app.use('/login', express.static(path.join(__dirname, '../client/pages/login.html')))
+app.use('/', handlers.checkSession, express.static(path.join(__dirname, '../client'), {redirect: false}));
+app.use('/lib', express.static(path.join(__dirname, '../../node_modules'), {redirect: false}));
+app.use('/login', express.static(path.join(__dirname, '../client/pages/login.html'), {redirect: false}))
 app.use('/logout', handlers.logout);
-app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.html')))
-
+app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.html'), {redirect: false}))
 
 app.post('/signup', handlers.signup);
 app.post('/login', handlers.login);
