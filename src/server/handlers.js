@@ -18,7 +18,7 @@ module.exports = {
       if (user) {
         req.session.username = req.body.username;
         req.session.password = req.body.password;
-        console.log('Loggin in..');
+        console.log('Logging in..');
         res.redirect('/');
       } else {
         res.send('Invalid username/password. Please refresh');
@@ -69,6 +69,9 @@ module.exports = {
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
+    var username = req.session.username;
+    // var user = User.findOne({username: req.session.username})
+    console.log(username);
     Movie.find({title: req.body.movie}).then((movies) => {
       // add movie to db if the query returned empty
       if (!movies.length) {
@@ -88,11 +91,29 @@ module.exports = {
             }
             new Movie(info).save().then(function(movie) {
               console.log('Saving movie to db');
+              console.log('Movie: ', movie);
+              User.update({username: username},
+                          {$push: {movieList: movie._id}},
+                          {safe: true, upsert: true},
+                          (err, model) => {
+                            if (err) {
+                              console.log('err updating user movieList', err);
+                            }
+                          });
               res.send(movie);
             })
           }
         })
       } else {
+        console.log('Movie: ', movies[0]);
+        User.update({username: username},
+                    {$push: {movieList: movies[0]._id}},
+                    {safe: true, upsert: true},
+                    (err, model) => {
+                      if (err) {
+                        console.log('err updating user movieList', err);
+                      }
+                    });
         res.send(movies[0]);
       }
     }).catch((err) => {
