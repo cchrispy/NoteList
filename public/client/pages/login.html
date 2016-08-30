@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h1>Log in</h1>
+  <form id='form'>
+    Username: <input id='username' type='text'/><br>
+    Password: <input id='password' type='password'/><br>
+    <input type='submit'/>
+  </form>
+<script src="lib/jquery/dist/jquery.js"></script>
+<script>
+  $('#form').on('submit', function(event) {
+    event.preventDefault();
+    var username = $('#username').val();
+    var password = $('#password').val();
+    $.ajax({
+      url: '/login',
+      method: 'POST',
+      data: {
+        username: username,
+        password: password
+      }
+    })
+  })
+</script>
+</body>
+</html>

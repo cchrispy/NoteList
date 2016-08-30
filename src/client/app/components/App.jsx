@@ -4,7 +4,9 @@ class App extends React.Component {
     this.state = {
       titles: [],
       title: '',
-      img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg'
+      display: {
+        img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg',
+      }
     };
   }
   setTitleState(val) {
@@ -40,9 +42,8 @@ class App extends React.Component {
       success: (data) => {
         console.log(data);
         this.setState({
-          img: data.img
+          display: data
         });
-        this.render();
       },
       error: (err) => {
         console.log('error querying for movie: ', err);
@@ -60,7 +61,7 @@ class App extends React.Component {
         </div>
 
         <div id='movieInfo'>
-          <Display img={this.state.img}/>
+          <Display info={this.state.display}/>
         </div>
       </div>
     )

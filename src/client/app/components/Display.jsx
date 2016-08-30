@@ -10,7 +10,7 @@ class Display extends React.Component {
   render() {
     return (
       <div>
-        <Picture src={this.state.img}/>
+        <Picture src={this.props.info.img}/>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 var db = require('../db/config.js');
 var request = require('request');
+var session = require('express-session');
 
 var User = db.User;
 var Movie = db.Movie;
@@ -7,6 +8,10 @@ var Movie = db.Movie;
 var omdb = 'http://www.omdbapi.com/?'
 
 module.exports = {
+  login: (req, res, next) => {
+    console.log(req.body);
+    
+  },
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
@@ -18,6 +23,7 @@ module.exports = {
             console.log('error from omdb request: ', err);
           } else {
             var data = JSON.parse(response.body);
+            console.log(data);
             var info = {
               title: data.Title,
               year: data.Year,

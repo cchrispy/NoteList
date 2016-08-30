@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var handlers = require('./handlers.js');
+var session = require('express-session');
 mongoose.Promise = require('bluebird');
 
 mongoose.connect('mongodb://localhost/notelist');
@@ -14,11 +15,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', express.static(path.join(__dirname, '../client')));
 app.use('/lib', express.static(path.join(__dirname, '../../node_modules')));
+app.use('/login', express.static(path.join(__dirname, '../client/pages/login.html')))
 
-// app.post('/movies/search', function(req, res, body) {
-//   console.log(req.body);
-// })
-
+app.post('/login', handlers.login);
 app.post('/movies/search', handlers.addMovie);
 
 app.listen(8000);
