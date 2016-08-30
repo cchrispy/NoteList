@@ -14,10 +14,12 @@ app.use(session({secret: 'secret', username: null, password: null, resave: true,
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', express.static(path.join(__dirname, '../client')));
+// app.use('/', express.static(path.join(__dirname, '../client')));
+app.use('/', handlers.checkSession, express.static(path.join(__dirname, '../client')));
 app.use('/lib', express.static(path.join(__dirname, '../../node_modules')));
 app.use('/login', express.static(path.join(__dirname, '../client/pages/login.html')))
 app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.html')))
+
 
 app.get('/logout', handlers.logout);
 app.post('/login', handlers.login);

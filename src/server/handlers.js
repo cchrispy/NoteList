@@ -1,6 +1,7 @@
 var db = require('../db/config.js');
 var request = require('request');
 var app = require('./server.js');
+var _ = require('underscore');
 
 var User = db.User;
 var Movie = db.Movie;
@@ -19,6 +20,15 @@ module.exports = {
     req.session.password = null;
     console.log(req.session);
     res.redirect('/login');
+  },
+  checkSession: (req, res, next) => {
+    console.log(req.session);
+    if (req.session.username !== '') {
+      next();
+    } else {
+      var redirect = _.throttle(res.redirect, 600, {trailing: false});
+      redirect('/login');
+    }
   },
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
