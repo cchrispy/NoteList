@@ -1,6 +1,6 @@
 var db = require('../db/config.js');
 var request = require('request');
-var session = require('express-session');
+var app = require('./server.js');
 
 var User = db.User;
 var Movie = db.Movie;
@@ -9,8 +9,16 @@ var omdb = 'http://www.omdbapi.com/?'
 
 module.exports = {
   login: (req, res, next) => {
-    console.log(req.body);
-    
+    req.session.username = req.body.username;
+    req.session.password = req.body.password;
+    console.log(req.session);
+    res.redirect('/');
+  },
+  logout: (req, res, next) => {
+    req.session.username = null;
+    req.session.password = null;
+    console.log(req.session);
+    res.redirect('/login');
   },
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
