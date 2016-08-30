@@ -20,6 +20,9 @@ app.use('/login', express.static(path.join(__dirname, '../client/pages/login.htm
 app.use('/logout', handlers.logout);
 app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.html'), {redirect: false}))
 
+app.get('/movies/search', handlers.fetchMovies);
+
+
 app.post('/signup', handlers.signup);
 app.post('/login', handlers.login);
 app.post('/movies/search', handlers.addMovie);

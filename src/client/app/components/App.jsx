@@ -9,6 +9,18 @@ class App extends React.Component {
       }
     };
   }
+  componentWillMount() {
+    $.ajax({
+      url: '/movies/search',
+      method: 'GET',
+      success: (data) => {
+        console.log('Fetching movies: ', data);
+      },
+      error: (err) => {
+        console.log('Error fetching movies: ', err);
+      }
+    })
+  }
   setTitleState(val) {
     this.setState({title: val});
   }
@@ -46,7 +58,7 @@ class App extends React.Component {
         });
       },
       error: (err) => {
-        console.log('error querying for movie: ', err);
+        console.log('Error querying for movie: ', err);
       }
     })
   }

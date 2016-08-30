@@ -66,6 +66,13 @@ module.exports = {
     }
   },
 
+  fetchMovies: (req, res, next) => {
+    var username = req.session.username;
+    User.findOne({username: username}).then(user => {
+      res.send(user.movieList);
+    })
+  },
+
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
