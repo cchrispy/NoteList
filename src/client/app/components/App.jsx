@@ -51,21 +51,22 @@ class App extends React.Component {
     })
   }
   logout() {
-    $.ajax({
-      url: '/logout',
-      method: 'GET',
-      success: (data) => {
-        window.location = '/login';
-      },
-      error: (err) => {
-        console.log('error logging out: ', err);
-      }
-    })
+    // $.ajax({
+    //   url: '/logout',
+    //   method: 'GET',
+    //   success: (data) => {
+    //     window.location = '/login';
+    //   },
+    //   error: (err) => {
+    //     console.log('error logging out: ', err);
+    //   }
+    // })
+    console.log('hello');
   }
   render() {
     return (
       <div>
-        <button id='logout' onClick={this.logout.bind(this)}>Logout</button>
+        <a id='logout' href='/logout'>Logout</a>
         <div id='movieList'>
           <h4>Enter a movie title:</h4>
           <Input text={this.state.title} titleChange={this.setTitleState.bind(this)} addToTitles={this.addTitle.bind(this)}/>

@@ -12,23 +12,31 @@ module.exports = {
   login: (req, res, next) => {
     req.session.username = req.body.username;
     req.session.password = req.body.password;
-    console.log(req.session);
+    console.log('LOGIN SESSION: ', req.session);
     res.redirect('/');
   },
   logout: (req, res, next) => {
+    console.log('uhhhh');
     req.session.username = null;
     req.session.password = null;
-    console.log(req.session);
+    console.log('LOGOUT SESSION: ', req.session);
     res.redirect('/login');
+  },
+  signup: (req, res, next) => {
+    console.log('signing up');
+    console.log('username: ', req.body.username);
+    console.log('password: ', req.body.password);
+    res.redirect('/');
   },
   checkSession: (req, res, next) => {
     console.log(req.session);
-    if (req.session.username !== '') {
-      next();
-    } else {
-      var redirect = _.throttle(res.redirect, 600, {trailing: false});
-      redirect('/login');
-    }
+    // console.log(req.session);
+    // if (req.session.username !== '') {
+    //   next();
+    // } else {
+    //   res.redirect('/login');
+    // }
+    next();
   },
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');

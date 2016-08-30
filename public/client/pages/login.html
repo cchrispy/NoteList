@@ -4,14 +4,14 @@
   <title>Login</title>
 </head>
 <body>
-  <button id='signup' style='float:right'>Sign up</button>
+  <a id='signup' href='/signup' style='float:right'>Sign up</a>
   <h1>Log in</h1>
-  <form id='form'>
-    Username: <input id='username' type='text'/><br>
-    Password: <input id='password' type='password'/><br>
+  <form id='form' method='POST'>
+    Username: <input id='username' name='username' type='text'/><br>
+    Password: <input id='password' name='password' type='password'/><br>
     <input type='submit'/>
   </form>
-<script src="lib/jquery/dist/jquery.js"></script>
+<!-- <script src="lib/jquery/dist/jquery.js"></script>
 <script>
   $('#form').on('submit', function(event) {
     event.preventDefault();
@@ -33,6 +33,6 @@
     event.preventDefault();
     window.location = '/signup';
   })
-</script>
+</script> -->
 </body>
 </html>
