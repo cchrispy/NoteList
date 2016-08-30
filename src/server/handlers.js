@@ -19,6 +19,7 @@ module.exports = {
       if (user) {
         req.session.username = req.body.username;
         req.session.password = req.body.password;
+        req.session.picture = user.picture;
         console.log('Logging in..');
         res.redirect('/');
       } else {
@@ -30,6 +31,7 @@ module.exports = {
   logout: (req, res, next) => {
     req.session.username = null;
     req.session.password = null;
+    req.session.picture = null;
     console.log('Logging out..');
     res.redirect('/login');
   },
@@ -73,6 +75,7 @@ module.exports = {
     // fetches movies on login, and profile picture
     var username = req.session.username;
     var picture = req.session.picture;
+    console.log(username, picture);
     User.findOne({username: username}).then(user => {
       Movie.find({'_id': {
         $in: user.movieList

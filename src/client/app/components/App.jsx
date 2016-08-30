@@ -17,7 +17,7 @@ class App extends React.Component {
       url: '/movies/search',
       method: 'GET',
       success: (data) => {
-        console.log('Fetching movies: ', data.movies);
+        console.log('Fetching movies: ', data);
         this.setState({
           titles: data.movies.map(movie => {
             return movie.title;
@@ -69,7 +69,7 @@ class App extends React.Component {
     }
   }
   queryMovie(movieTitle) {
-    // add movie to database
+    // add movie to database and checks for matches
     $.ajax({
       url: '/movies/search',
       method: 'POST',
@@ -80,7 +80,7 @@ class App extends React.Component {
       success: (data) => {
         console.log('Movie: ', data);
         this.setState({
-          match: data.matches[0].username || '',
+          match: data.matches[0] ? data.matches[0].username : '',
           display: data.movie
         });
       },
