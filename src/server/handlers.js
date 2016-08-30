@@ -112,7 +112,8 @@ module.exports = {
                               console.log('err updating user movieList', err);
                             }
                           });
-              res.send(movie);
+              return movie;
+              // res.send(movie);
             })
           }
         })
@@ -126,18 +127,21 @@ module.exports = {
                         console.log('err updating user movieList', err);
                       }
                     });
-        res.send(movies[0]);
+        return movies[0]
+        // res.send(movies[0]);
       }
+    }).then((movie) => {
+      // finds users with matching movies
+      User.findOne({username: req.session.username}).then(user => {
+        User.find({movieList: {$in: user.movieList},
+                   username: {$ne: req.session.username}}).then(users => {
+          console.log('the matching users: ', users);
+          res.send({matches: users,
+                    movie: movie});
+        })
+      })
     }).catch((err) => {
       console.log('error in finding movies: ', err);
     })
   },
-
-  checkUsers: (req, res, next) => {
-    // finds users with matching movies
-    var movie = req.body.movie;
-    User.findOne({username: req.session.username}).then(user => {
-      console.log('users movieList: ', user.movieList);
-    })
-  }
 }

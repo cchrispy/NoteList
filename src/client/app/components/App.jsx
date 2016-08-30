@@ -31,7 +31,7 @@ class App extends React.Component {
     this.setState({title: val});
   }
   addTitle() {
-    // adds title to the list
+    // adds title to the list and checks for matches
     var movieTitle = this.state.title.toLowerCase();
     if (this.state.titles.indexOf(movieTitle) === -1) {
       var newTitles = this.state.titles;
@@ -41,7 +41,6 @@ class App extends React.Component {
         titles: newTitles,
         title: ''
       })
-      this.checkMatches(movieTitle);
     }
   }
   queryMovie(movieTitle) {
@@ -61,24 +60,6 @@ class App extends React.Component {
       },
       error: (err) => {
         console.log('Error querying for movie: ', err);
-      }
-    })
-  }
-  checkMatches(movieTitle) {
-    // checks if movie is in other users' movieLists
-    $.ajax({
-      url: '/movies/users',
-      method: 'POST',
-      dataType: 'json',
-      data: {
-        movie: movieTitle
-      },
-      success: (data) => {
-        console.log('Matched User: ', data);
-        
-      },
-      error: (err) => {
-        console.log('Error checking for matches: ', err);
       }
     })
   }
