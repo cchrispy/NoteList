@@ -8,9 +8,11 @@ var userSchema = mongoose.Schema({
 
 var movieSchema = mongoose.Schema({
   title: String,
+  year: String,
   rating: String, // Numbers in mongoose can't handle floats
-  year: Number,
-  img: String
+  img: String,
+  length: String,
+  plot: String
 })
 
 module.exports.User = mongoose.model('User', userSchema);
