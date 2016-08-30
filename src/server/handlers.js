@@ -1,3 +1,5 @@
+// handles requests to every route
+
 var db = require('../db/config.js');
 var request = require('request');
 var app = require('./server.js');
@@ -13,41 +15,44 @@ module.exports = {
     var username = req.body.username;
     var password = req.body.password;
     User.findOne({username: username, password: password}).then(user => {
-      console.log(user);
       if (user) {
         req.session.username = req.body.username;
         req.session.password = req.body.password;
+        console.log('Loggin in..');
         res.redirect('/');
       } else {
         res.send('Invalid username/password. Please refresh');
       }
     })
   },
+
   logout: (req, res, next) => {
     req.session.username = null;
     req.session.password = null;
-    console.log('LOGOUT SESSION: ', req.session);
+    console.log('Logging out..');
     res.redirect('/login');
   },
+
   signup: (req, res, next) => {
-    console.log('signing up..');
+    console.log('Signing up..');
     var username = req.body.username;
     var password = req.body.password;
     User.find({username: username}).then(users => {
       if (!users.length) {
         new User({username: username, password: password}).save()
         .then(user => {
-          console.log('new user: ', user);
+          console.log('New user: ', user);
           req.session.username = req.body.username;
           req.session.password = req.body.password;
           res.redirect('/');
         })
       } else {
-        console.log('that user already exists');
+        console.log('That user already exists');
         res.redirect('/login');
       }
     })
   },
+
   checkSession: (req, res, next) => {
     var path = req.path;
     if (path === '/' && path !== '/login' && path !== '/signup') {
@@ -60,6 +65,7 @@ module.exports = {
       next();
     }
   },
+
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
@@ -81,7 +87,7 @@ module.exports = {
               rating: data.tomatoUserRating
             }
             new Movie(info).save().then(function(movie) {
-              console.log('saving movie to db');
+              console.log('Saving movie to db');
               res.send(movie);
             })
           }

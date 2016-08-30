@@ -50,19 +50,6 @@ class App extends React.Component {
       }
     })
   }
-  logout() {
-    // $.ajax({
-    //   url: '/logout',
-    //   method: 'GET',
-    //   success: (data) => {
-    //     window.location = '/login';
-    //   },
-    //   error: (err) => {
-    //     console.log('error logging out: ', err);
-    //   }
-    // })
-    console.log('hello');
-  }
   render() {
     return (
       <div>
