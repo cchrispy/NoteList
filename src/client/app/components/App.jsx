@@ -16,6 +16,11 @@ class App extends React.Component {
       method: 'GET',
       success: (data) => {
         console.log('Fetching movies: ', data);
+        this.setState({
+          titles: data.map(movie => {
+            return movie.title;
+          })
+        })
       },
       error: (err) => {
         console.log('Error fetching movies: ', err);
