@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var handlers = require('./handlers.js');
+mongoose.Promise = require('bluebird');
 
 mongoose.connect('mongodb://localhost/notelist');
 

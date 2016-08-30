@@ -7,7 +7,7 @@ var userSchema = mongoose.Schema({
 })
 
 var movieSchema = mongoose.Schema({
-  title: String,
+  title: {type: String, lowercase: true},
   year: String,
   rating: String, // Numbers in mongoose can't handle floats
   img: String,

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17,7 +17,7 @@ var Display = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Display.__proto__ || Object.getPrototypeOf(Display)).call(this, props));
 
     _this.state = {
-      img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg',
+      img: props.img,
       title: null,
       rating: null
     };
@@ -25,10 +25,10 @@ var Display = function (_React$Component) {
   }
 
   _createClass(Display, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return React.createElement(
-        'div',
+        "div",
         null,
         React.createElement(Picture, { src: this.state.img })
       );
@@ -39,4 +39,4 @@ var Display = function (_React$Component) {
 }(React.Component);
 
 window.Display = Display;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9jbGllbnQvYXBwL2NvbXBvbmVudHMvRGlzcGxheS5qc3giXSwibmFtZXMiOlsiRGlzcGxheSIsInByb3BzIiwic3RhdGUiLCJpbWciLCJ0aXRsZSIsInJhdGluZyIsIlJlYWN0IiwiQ29tcG9uZW50Iiwid2luZG93Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0lBQU1BLE87OztBQUNKLG1CQUFZQyxLQUFaLEVBQW1CO0FBQUE7O0FBQUEsa0hBQ1hBLEtBRFc7O0FBRWpCLFVBQUtDLEtBQUwsR0FBYTtBQUNYQyxXQUFLLHlFQURNO0FBRVhDLGFBQU8sSUFGSTtBQUdYQyxjQUFRO0FBSEcsS0FBYjtBQUZpQjtBQU9sQjs7Ozs2QkFDUTtBQUNQLGFBQ0U7QUFBQTtBQUFBO0FBQ0UsNEJBQUMsT0FBRCxJQUFTLEtBQUssS0FBS0gsS0FBTCxDQUFXQyxHQUF6QjtBQURGLE9BREY7QUFLRDs7OztFQWZtQkcsTUFBTUMsUzs7QUFrQjVCQyxPQUFPUixPQUFQLEdBQWlCQSxPQUFqQiIsImZpbGUiOiJEaXNwbGF5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgRGlzcGxheSBleHRlbmRzIFJlYWN0LkNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKHByb3BzKSB7XG4gICAgc3VwZXIocHJvcHMpO1xuICAgIHRoaXMuc3RhdGUgPSB7XG4gICAgICBpbWc6ICdodHRwOi8vY2RuMS13d3cuY29taW5nc29vbi5uZXQvYXNzZXRzL3VwbG9hZHMvMjAxNi8wNS9yb2JpbndpbGxpYW1zLmpwZycsXG4gICAgICB0aXRsZTogbnVsbCxcbiAgICAgIHJhdGluZzogbnVsbFxuICAgIH07XG4gIH1cbiAgcmVuZGVyKCkge1xuICAgIHJldHVybiAoXG4gICAgICA8ZGl2PlxuICAgICAgICA8UGljdHVyZSBzcmM9e3RoaXMuc3RhdGUuaW1nfS8+XG4gICAgICA8L2Rpdj5cbiAgICApXG4gIH1cbn1cblxud2luZG93LkRpc3BsYXkgPSBEaXNwbGF5OyJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9jbGllbnQvYXBwL2NvbXBvbmVudHMvRGlzcGxheS5qc3giXSwibmFtZXMiOlsiRGlzcGxheSIsInByb3BzIiwic3RhdGUiLCJpbWciLCJ0aXRsZSIsInJhdGluZyIsIlJlYWN0IiwiQ29tcG9uZW50Iiwid2luZG93Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0lBQU1BLE87OztBQUNKLG1CQUFZQyxLQUFaLEVBQW1CO0FBQUE7O0FBQUEsa0hBQ1hBLEtBRFc7O0FBRWpCLFVBQUtDLEtBQUwsR0FBYTtBQUNYQyxXQUFLRixNQUFNRSxHQURBO0FBRVhDLGFBQU8sSUFGSTtBQUdYQyxjQUFRO0FBSEcsS0FBYjtBQUZpQjtBQU9sQjs7Ozs2QkFDUTtBQUNQLGFBQ0U7QUFBQTtBQUFBO0FBQ0UsNEJBQUMsT0FBRCxJQUFTLEtBQUssS0FBS0gsS0FBTCxDQUFXQyxHQUF6QjtBQURGLE9BREY7QUFLRDs7OztFQWZtQkcsTUFBTUMsUzs7QUFrQjVCQyxPQUFPUixPQUFQLEdBQWlCQSxPQUFqQiIsImZpbGUiOiJEaXNwbGF5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgRGlzcGxheSBleHRlbmRzIFJlYWN0LkNvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKHByb3BzKSB7XG4gICAgc3VwZXIocHJvcHMpO1xuICAgIHRoaXMuc3RhdGUgPSB7XG4gICAgICBpbWc6IHByb3BzLmltZyxcbiAgICAgIHRpdGxlOiBudWxsLFxuICAgICAgcmF0aW5nOiBudWxsXG4gICAgfTtcbiAgfVxuICByZW5kZXIoKSB7XG4gICAgcmV0dXJuIChcbiAgICAgIDxkaXY+XG4gICAgICAgIDxQaWN0dXJlIHNyYz17dGhpcy5zdGF0ZS5pbWd9Lz5cbiAgICAgIDwvZGl2PlxuICAgIClcbiAgfVxufVxuXG53aW5kb3cuRGlzcGxheSA9IERpc3BsYXk7Il19

@@ -3,7 +3,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       titles: [],
-      title: ''
+      title: '',
+      img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg'
     };
   }
   setTitleState(val) {
@@ -31,6 +32,12 @@ class App extends React.Component {
       dataType: 'json',
       data: {
         movie: movieTitle
+      },
+      success: (data) => {
+        console.log(data);
+        this.setState({
+          img: data.img
+        })
       }
     })
   }
@@ -45,7 +52,7 @@ class App extends React.Component {
         </div>
 
         <div id='movieInfo'>
-          <Display />
+          <Display img={this.state.img}/>
         </div>
       </div>
     )
