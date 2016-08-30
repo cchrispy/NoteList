@@ -4,6 +4,7 @@ class App extends React.Component {
     this.state = {
       titles: [],
       title: '',
+      match: '',
       display: {
         img: 'http://cdn1-www.comingsoon.net/assets/uploads/2016/05/robinwilliams.jpg',
       }
@@ -26,6 +27,28 @@ class App extends React.Component {
         console.log('Error fetching movies: ', err);
       }
     })
+  }
+  componentDidUpdate(_prevProps, prevState) {
+    // renders a match onto the page
+    if (prevState.match !== this.state.match) {
+      console.log(this.state.match);
+      var match = this.state.match;
+      $.ajax({
+        url: '/users',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          match: match
+        },
+        success: (data) => {
+          console.log('Match data: ', data);
+          
+        },
+        error: (err) => {
+          console.log('Error searching for match: ', err);
+        }
+      })
+    }
   }
   setTitleState(val) {
     this.setState({title: val});
@@ -55,7 +78,8 @@ class App extends React.Component {
       success: (data) => {
         console.log('Movie: ', data);
         this.setState({
-          display: data
+          match: data.matches[0].username || '',
+          display: data.movie
         });
       },
       error: (err) => {

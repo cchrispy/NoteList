@@ -22,6 +22,7 @@ app.use('/signup', express.static(path.join(__dirname, '../client/pages/signup.h
 
 app.get('/movies/search', handlers.fetchMovies);
 
+app.post('/users', handlers.matchUser);
 app.post('/signup', handlers.signup);
 app.post('/login', handlers.login);
 app.post('/movies/search', handlers.addMovie);

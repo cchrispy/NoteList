@@ -79,6 +79,14 @@ module.exports = {
     })
   },
 
+  matchUser: (req, res, next) => {
+    var match = req.body.match;
+    User.findOne({username: match}).then(user => {
+      console.log('Matched user found: ', user);
+      res.send(user);
+    })
+  },
+
   addMovie: (req, res, next) => {
     // sends movie info
     var movie = req.body.movie.split(' ').join('+');
