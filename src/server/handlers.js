@@ -112,8 +112,8 @@ module.exports = {
                               console.log('err updating user movieList', err);
                             }
                           });
-              return movie;
-              // res.send(movie);
+              res.send({matches: [],
+                        movie: movie});
             })
           }
         })
@@ -128,12 +128,11 @@ module.exports = {
                       }
                     });
         return movies[0]
-        // res.send(movies[0]);
       }
     }).then((movie) => {
       // finds users with matching movies
       User.findOne({username: req.session.username}).then(user => {
-        User.find({movieList: {$in: user.movieList},
+        User.find({movieList: {$in: [movie._id]},
                    username: {$ne: req.session.username}}).then(users => {
           console.log('the matching users: ', users);
           res.send({matches: users,
