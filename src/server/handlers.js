@@ -38,13 +38,15 @@ module.exports = {
     console.log('Signing up..');
     var username = req.body.username;
     var password = req.body.password;
+    var picture = req.body.picture || '';
     User.find({username: username}).then(users => {
       if (!users.length) {
-        new User({username: username, password: password}).save()
+        new User({username: username, password: password, picture: picture}).save()
         .then(user => {
           console.log('New user: ', user);
-          req.session.username = req.body.username;
-          req.session.password = req.body.password;
+          req.session.username = username;
+          req.session.password = password;
+          req.session.picture = picture;
           res.redirect('/');
         })
       } else {
@@ -68,13 +70,14 @@ module.exports = {
   },
 
   fetchMovies: (req, res, next) => {
-    // fetches movies on login
+    // fetches movies on login, and profile picture
     var username = req.session.username;
+    var picture = req.session.picture;
     User.findOne({username: username}).then(user => {
       Movie.find({'_id': {
         $in: user.movieList
       }}).then(movies => {
-        res.send(movies);
+        res.send({movies: movies, picture: picture});
       })
     })
   },

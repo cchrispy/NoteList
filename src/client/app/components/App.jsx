@@ -17,11 +17,12 @@ class App extends React.Component {
       url: '/movies/search',
       method: 'GET',
       success: (data) => {
-        console.log('Fetching movies: ', data);
+        console.log('Fetching movies: ', data.movies);
         this.setState({
-          titles: data.map(movie => {
+          titles: data.movies.map(movie => {
             return movie.title;
-          })
+          }),
+          profile: data.picture
         })
       },
       error: (err) => {
