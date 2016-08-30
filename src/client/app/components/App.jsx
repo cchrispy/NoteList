@@ -10,6 +10,7 @@ class App extends React.Component {
     };
   }
   componentWillMount() {
+    // fetches user's movies
     $.ajax({
       url: '/movies/search',
       method: 'GET',
@@ -24,11 +25,6 @@ class App extends React.Component {
   setTitleState(val) {
     this.setState({title: val});
   }
-  // removeItem(title) {
-  //   var newTitles = this.state.titles;
-  //   newTitles.splice(newTitles.indexOf(item), 1);
-  //   this.setState({titles: newTitles})
-  // }
   addTitle() {
     // adds title to the list
     var movieTitle = this.state.title.toLowerCase();

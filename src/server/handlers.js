@@ -67,9 +67,14 @@ module.exports = {
   },
 
   fetchMovies: (req, res, next) => {
+    // fetches movies on login
     var username = req.session.username;
     User.findOne({username: username}).then(user => {
-      res.send(user.movieList);
+      Movie.find({'_id': {
+        $in: user.movieList
+      }}).then(movies => {
+        res.send(movies);
+      })
     })
   },
 
@@ -77,8 +82,6 @@ module.exports = {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
     var username = req.session.username;
-    // var user = User.findOne({username: req.session.username})
-    console.log(username);
     Movie.find({title: req.body.movie}).then((movies) => {
       // add movie to db if the query returned empty
       if (!movies.length) {
@@ -87,7 +90,7 @@ module.exports = {
             console.log('error from omdb request: ', err);
           } else {
             var data = JSON.parse(response.body);
-            console.log(data);
+            console.log('Movie data: ', data);
             var info = {
               title: data.Title,
               year: data.Year,
@@ -97,7 +100,7 @@ module.exports = {
               rating: data.tomatoUserRating
             }
             new Movie(info).save().then(function(movie) {
-              console.log('Saving movie to db');
+              console.log('Saving movie to db..');
               console.log('Movie: ', movie);
               User.update({username: username},
                           {$push: {movieList: movie._id}},
