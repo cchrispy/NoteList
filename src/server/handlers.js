@@ -10,7 +10,7 @@ module.exports = {
   addMovie: (req, res, next) => {
     var movie = req.body.movie.split(' ').join('+');
     var url = omdb + 'tomatoes=true&t=' + movie;
-    Movie.find({title: req.body.movie.toLowerCase()}).then((movies) => {
+    Movie.find({title: req.body.movie}).then((movies) => {
       // add movie to db if the query returned empty
       if (!movies.length) {
         request(url, function(err, response, body) {
@@ -31,7 +31,7 @@ module.exports = {
               res.send(movie);
             })
           }
-        }) 
+        })
       } else {
         res.send(movies[0]);
       }

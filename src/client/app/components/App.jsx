@@ -16,13 +16,17 @@ class App extends React.Component {
   //   this.setState({titles: newTitles})
   // }
   addTitle() {
-    this.queryMovie(this.state.title);
-    var newTitles = this.state.titles;
-    newTitles.push(this.state.title);
-    this.setState({
-      titles: newTitles,
-      title: ''
-    })
+    // adds title to the list
+    var movieTitle = this.state.title.toLowerCase();
+    if (this.state.titles.indexOf(movieTitle) === -1) {
+      var newTitles = this.state.titles;
+      this.queryMovie(movieTitle);
+      newTitles.push(movieTitle);
+      this.setState({
+        titles: newTitles,
+        title: ''
+      })
+    }
   }
   queryMovie(movieTitle) {
     // add movie to database
@@ -37,7 +41,11 @@ class App extends React.Component {
         console.log(data);
         this.setState({
           img: data.img
-        })
+        });
+        this.render();
+      },
+      error: (err) => {
+        console.log('error querying for movie: ', err);
       }
     })
   }
