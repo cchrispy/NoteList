@@ -9,8 +9,8 @@ class Display extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Picture src={this.props.info.img}/>
+      <div className='display'>
+        <Picture src={this.props.info}/>
       </div>
     )
   }
