@@ -108,6 +108,9 @@ class App extends React.Component {
       }
     })
   }
+  sendMessage() {
+    prompt('Enter a message: ');
+  }
   render() {
     return (
       <div>
@@ -124,7 +127,7 @@ class App extends React.Component {
         </div>
 
         <div id='matchBox'>
-          {this.state.userMatch.show ? <Match details={this.state.userMatch} toggle={this.toggleMatch.bind(this)}/> : null}
+          {this.state.userMatch.show ? <Match details={this.state.userMatch} toggle={this.toggleMatch.bind(this)} message={this.sendMessage.bind(this)}/> : null}
         </div>
       </div>
     )
